@@ -31,10 +31,7 @@ public class Comanda extends Activity {
 	private DBAdapter dbHelper;
 	private Cursor cursor;
 
-	// private static final int ACTION_BAR_INFO = 0;
-
 	private String[] mProductos;
-	// List<EditText> mCantidades = new ArrayList<EditText>();
 	List<EditText> mSubtotales = new ArrayList<EditText>();
 
 	@Override

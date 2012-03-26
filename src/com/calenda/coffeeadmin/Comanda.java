@@ -24,7 +24,6 @@ import android.widget.TableRow.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.calenda.coffeeadmin.R;
 import com.calenda.coffeeadmin.database.DBAdapter;
 
 public class Comanda extends Activity {

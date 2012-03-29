@@ -1,1 +1,40 @@
-CoffeeAdmin es una aplicación para Android que provee un control sencillo y eficiente de las cuentas o notas de un Café, Restaurant o Bar.
+-----Español------
+
+NOTA: Esta es una versión alpha con muchos bugs.
+
+CoffeeAdmin es una aplicación para Android que provee un control sencillo y eficiente de las cuentas o notas de venta de un Café, Restaurant o Bar.
+
+Funcionalidades:
+- Permite capturar las notas de venta de una mesa.
+- Calcula automáticamente el total de la nota de venta.
+- Permite visualizar un resumen y el total de las ventas del día.
+- Permite visualizar un resumen y el total de las ventas del mes actual. 
+
+TODO's:
+- Soporte varias mesas.
+- Soporte para meseros (Pensar en una estrategia cliente / servidor talves)
+- Visualizar un resumen de ventas de cualquier día.
+- Visualizar un resumen de ventas de cualquier mes.
+- Soporte para administrar el catálogo de productos (actualmente esta hardcodeado).
+- Implementar Object Relational Mapping.
+
+
+-----English-----
+
+Note: This is an alpha version with a lot of bugs.
+
+CoffeeAdmin is an Android app which provides a easy and efficient control of the bills or sale tickets in a Coffee, Restaurant or Bar.
+
+Functions:
+- Capture sales notes of a table.
+- Automatically calculates the total bill of sale.
+- Displays a summary and total sales of the current day.
+- Displays a summary and total sales of the current month.
+
+TODO's:
+- Support for multiple tables.
+- Support for waiters.
+- View a summary of sales for any day.
+- View a summary of sales for any month.
+- Support for managing the product catalog (currently hardcoded).
+- Implementing Object Relational Mapping.

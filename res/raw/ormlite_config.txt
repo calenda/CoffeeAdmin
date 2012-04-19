@@ -1,0 +1,22 @@
+#
+# generated on 2012/04/19 10:46:18
+#
+# --table-start--
+dataClass=com.calenda.coffeeadmin.database.Producto
+tableName=Productos
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=producto
+canBeNull=false
+# --field-end--
+# --field-start--
+fieldName=precio
+canBeNull=false
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################

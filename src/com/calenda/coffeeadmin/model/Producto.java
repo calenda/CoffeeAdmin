@@ -1,4 +1,4 @@
-package com.calenda.coffeeadmin.database;
+package com.calenda.coffeeadmin.model;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -7,13 +7,13 @@ import com.j256.ormlite.table.DatabaseTable;
 public class Producto {
 	
 	@DatabaseField(generatedId = true)
-	int id;
+	private int id;
 	
 	@DatabaseField (canBeNull=false)
-	String producto;
+	private String producto;
 	
 	@DatabaseField (canBeNull=false)
-	Float precio;
+	private Float precio;
 	
 	Producto(){
 		
@@ -27,8 +27,32 @@ public class Producto {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(producto).append(" - $").append(precio);
+		sb.append(producto).append(" -  $ ").append(precio);
 		return sb.toString();
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getProducto() {
+		return producto;
+	}
+
+	public void setProducto(String producto) {
+		this.producto = producto;
+	}
+
+	public Float getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(Float precio) {
+		this.precio = precio;
 	}
 
 }

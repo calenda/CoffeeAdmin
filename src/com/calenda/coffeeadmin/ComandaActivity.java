@@ -1,10 +1,10 @@
 package com.calenda.coffeeadmin;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.KeyEvent;
@@ -24,21 +24,23 @@ import android.widget.TableRow.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.calenda.coffeeadmin.database.DBAdapter;
+import com.calenda.coffeeadmin.db.DatabaseManager;
+import com.calenda.coffeeadmin.model.Comanda;
+import com.calenda.coffeeadmin.model.Producto;
 
-public class Comanda extends Activity {
-
-	private DBAdapter dbHelper;
-	private Cursor cursor;
+public class ComandaActivity extends Activity {
 
 	private String[] mProductos;
+	private List<Producto> productos;
 	List<EditText> mSubtotales = new ArrayList<EditText>();
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.menu, menu);
+
 		return true;
+
 	}
 
 	@Override
@@ -50,62 +52,45 @@ public class Comanda extends Activity {
 
 		case R.id.guardar:
 			guardar();
-			 Toast.makeText(Comanda.this, "Comanda guardada",
-			 Toast.LENGTH_SHORT).show();
+			Toast.makeText(ComandaActivity.this, "Comanda guardada",
+					Toast.LENGTH_SHORT).show();
 			return true;
 		case R.id.limpiar:
-//			 Toast.makeText(Comanda.this, "limpiar",
-//			 Toast.LENGTH_SHORT).show();
-			 limpiar();
+			limpiar();
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 	};
 
-	private void limpiar(){
+	private void limpiar() {
 		TableLayout tl = (TableLayout) findViewById(R.id.spreadsheet);
 		tl.removeAllViews();
 		mSubtotales.clear();
 		refreshTotal();
-		
+
 	}
+
 	private void guardar() {
 		TextView total = (TextView) findViewById(R.id.total);
 		Float totald = Float.parseFloat(total.getText().toString());
-		dbHelper.createComanda(totald);
+		Date fecha = new Date();
+		Comanda c = new Comanda(fecha, totald);
+		DatabaseManager.getInstance().addComanda(c);
 	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		DatabaseManager.init(this);
 		setContentView(R.layout.comanda);
-
-		// addActionBarItem(Type.Info, ACTION_BAR_INFO);
-		dbHelper = new DBAdapter(this);
-		dbHelper.open();
-		getProductosArray();
-		// addRow = (Button) findViewById(R.id.addRow);
-
-		// addRow.setOnClickListener(new Button.OnClickListener() {
-		// public void onClick(View v) {
-		// addRow();
-		// }
-		// });
 	}
 
-	// @Override
-	// public boolean onHandleActionBarItemClick(ActionBarItem item, int
-	// position) {
-	// switch (item.getItemId()) {
-	// case ACTION_BAR_INFO:
-	// startActivity(new Intent(this, InfoActivity.class));
-	// break;
-	// default:
-	// return super.onHandleActionBarItemClick(item, position);
-	// }
-	// return true;
-	// }
+	@Override
+	protected void onStart() {
+		super.onStart();
+		getProductosArray();
+	}
 
 	public void addRow() {
 		TableLayout tl = (TableLayout) findViewById(R.id.spreadsheet);
@@ -119,7 +104,6 @@ public class Comanda extends Activity {
 		txtCant.setInputType(InputType.TYPE_CLASS_NUMBER);
 		txtCant.setSelectAllOnFocus(true);
 		txtCant.setId(tl.getChildCount());
-		// mCantidades.add(txtCant);
 		txtCant.setOnKeyListener(new OnKeyListener() {
 
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -154,41 +138,23 @@ public class Comanda extends Activity {
 
 	private void getProductosArray() {
 
-		cursor = dbHelper.fetchAllProductos();
+		productos = DatabaseManager.getInstance().getAllProductos();
 
-		if (cursor.getCount() == 0) {
-			dbHelper.createProducto("Latte", 18f, "Calientes");
-			dbHelper.createProducto("Cap. sabor", 24f, "Calientes");
-			dbHelper.createProducto("Americano", 12f, "Calientes");
-			dbHelper.createProducto("Capuchino", 18f, "Calientes");
-			dbHelper.createProducto("Moka", 28f, "Calientes");
-			dbHelper.createProducto("Baguette 3Q", 28f, "Comida");
-			dbHelper.createProducto("Baguette", 25f, "Comida");
-			dbHelper.createProducto("Baguette C.", 30f, "Comida");
-			dbHelper.createProducto("Cuernito 3Q", 24f, "Comida");
-			dbHelper.createProducto("Frape Cap", 24f, "Frios");
-			dbHelper.createProducto("Frape Moka", 28f, "Frios");
-			dbHelper.createProducto("Coca Cola", 10f, "Frios");
-			dbHelper.createProducto("Agua", 10f, "Frios");
-			cursor = dbHelper.fetchAllProductos();
+		if (productos.size() == 0) {
+
+			DatabaseManager.getInstance().addProducto(
+					new Producto("Latte", 10f));
+			DatabaseManager.getInstance().addProducto(
+					new Producto("Americano", 15f));
 		}
 
-		startManagingCursor(cursor);
-
-		ArrayList<String> categorias = new ArrayList<String>();
-
-//		for (cursor.moveToFirst(); cursor.moveToNext(); cursor.isAfterLast()) {
-//			categorias.add(cursor.getString(1) + " $" + cursor.getString(2));
-//		}
-		
-		if (cursor.moveToFirst()) {
-		     //Recorremos el cursor hasta que no haya más registros
-		     do {
-		    	 categorias.add(cursor.getString(1) + " $" + cursor.getString(2));
-		     } while(cursor.moveToNext());
+		List<String> nombresProds = new ArrayList<String>();
+		for (Producto prod : productos) {
+			nombresProds.add(prod.toString());
 		}
-		mProductos = (String[]) categorias
-				.toArray(new String[categorias.size()]);
+
+		mProductos = (String[]) nombresProds.toArray(new String[nombresProds
+				.size()]);
 		addRow();
 	}
 
@@ -214,7 +180,7 @@ public class Comanda extends Activity {
 
 	public void refreshTotal() {
 		TextView total = (TextView) findViewById(R.id.total);
-		total.setText(Double.toString(total()));
+		total.setText(Float.toString(total()));
 	}
 
 	public void refreshSubtotal(int child) {
@@ -225,27 +191,18 @@ public class Comanda extends Activity {
 		Spinner prod = (Spinner) tr.getChildAt(1);
 		TextView subT = (TextView) tr.getChildAt(2);
 
-		Double cantD = Double.parseDouble(cant.getText().toString());
-		cursor.moveToPosition(prod.getSelectedItemPosition() );
-		Double precio = cursor.getDouble(2);
-
-		subT.setText(Double.toString(cantD * precio));
+		Float cantD = Float.parseFloat(cant.getText().toString());
+		Float precio = productos.get(prod.getSelectedItemPosition())
+				.getPrecio();
+		subT.setText(Float.toString(cantD * precio));
 		refreshTotal();
 	}
 
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		if (dbHelper != null)
-			dbHelper.close();
-	}
-
-	public Double total() {
-		Double total = 0.0;
+	public Float total() {
+		Float total = 0.0f;
 		for (int i = 0; i < mSubtotales.size(); i++) {
 			total = total
-					+ Double.parseDouble(mSubtotales.get(i).getText()
-							.toString());
+					+ Float.parseFloat(mSubtotales.get(i).getText().toString());
 
 		}
 		return total;

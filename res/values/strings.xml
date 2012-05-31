@@ -2,12 +2,8 @@
 <resources>
 
     <string name="app_name">Coffee Admin</string>
-    <!-- <string name="app_url">http://www.samcoles.co.uk</string> -->
-    <!-- <string name="info_activity_title">App Info</string> -->
     <string name="producto">Producto</string>
     <string name="cantidad">1</string>
-    <!-- <string name="p_unitario">PU</string> -->
-    <!-- <string name="subtotal">SubT</string> -->
     <string name="agregarProducto">Agregar Producto</string>
     <string name="guardar">Guardar</string>
     <string name="limpiar">Limpiar</string>
@@ -17,5 +13,6 @@
     <string name="total">Total</string>
     <string name="vacio">Vacío</string>
     <string name="mesa">Mesa</string>
+    <string name="tabContentDescr">Descr. Tab</string>
 
 </resources>

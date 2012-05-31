@@ -8,14 +8,13 @@
     android:orientation="vertical"
     android:padding="0dip" >
 
-    
-
     <ImageView
         android:id="@+id/tabsIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="0dip"
-        android:src="@drawable/ic_menu_edit" />
+        android:src="@drawable/ic_menu_edit" 
+        android:contentDescription="@string/tabContentDescr"/>
 
     <TextView
         android:id="@+id/tabsText"

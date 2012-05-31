@@ -19,11 +19,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Hoy" >
+        <activity android:name=".HoyActivity" >
         </activity>
-        <activity android:name=".Comanda" >
+        <activity android:name=".ComandaActivity" >
         </activity>
-        <activity android:name=".Mes" >
+        <activity android:name=".MesActivity" >
         </activity>
     </application>
 

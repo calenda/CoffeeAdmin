@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/nuevoProducto"
+        android:id="@+id/agregarProducto"
         android:icon="@android:drawable/ic_menu_add"
         android:title="@string/agregarProducto"/>
     <item
@@ -13,5 +13,9 @@
         android:id="@+id/limpiar"
         android:icon="@android:drawable/ic_menu_close_clear_cancel"
         android:title="@string/limpiar"/>
+    <item
+        android:id="@+id/catProductos"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="@string/catProductos"/>
 
 </menu>

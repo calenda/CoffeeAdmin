@@ -28,6 +28,7 @@ public class MainActivity extends TabActivity {
 		setupTab(new TextView(this), "Mes", MesActivity.class,
 				R.drawable.hoytab);
 
+
 	}
 
 	private void setupTab(final View view, final String tag, Class<?> cls,

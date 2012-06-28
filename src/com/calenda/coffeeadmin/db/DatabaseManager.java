@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import android.content.Context;
+import android.text.format.DateFormat;
 
 import com.calenda.coffeeadmin.model.Comanda;
 import com.calenda.coffeeadmin.model.Producto;
@@ -108,8 +109,8 @@ public class DatabaseManager {
 									DataType.FLOAT });
 
 			for (Object[] resultArray : comandasRaw) {
-				System.out.println("Fecha: " + resultArray[0] + ", Total: "
-						+ resultArray[1]);
+//				System.out.println("Fecha: " + resultArray[0] + ", Total: "
+//						+ resultArray[1]);
 				Date fecha = new Date(resultArray[0].toString());
 				fecha.setHours(0);
 				fecha.setMinutes(0);
@@ -125,6 +126,43 @@ public class DatabaseManager {
 		return comandas;
 	}
 
+	public List<Comanda> getAllComandasByMonth(Calendar fechaSelected) {
+		List<Comanda> comandas = new ArrayList<Comanda>();
+		try {
+
+			Dao<Comanda, Integer> comandaDao = getHelper().getComandaDao();
+
+			Date fechatmp = fechaSelected.getTime();
+			Date fechaParam = new Date(fechatmp.getYear(), fechatmp.getMonth(),
+					fechatmp.getDate());
+			String strFecha = (String) DateFormat.format("yyyy-MM-dd",
+					fechaParam.getTime());
+					
+			GenericRawResults<Object[]> comandasRaw = comandaDao
+					.queryRaw(
+							"SELECT fecha, sum(total) as total FROM comanda"+ 
+" where strftime(\"%Y-%m\",fecha) between strftime(\"%Y-%m\",?) and strftime(\"%Y-%m\",?)"+
+" GROUP by substr( fecha,0,11) ",
+							new DataType[] { DataType.DATE_STRING,
+									DataType.FLOAT }, strFecha, strFecha);
+
+			for (Object[] resultArray : comandasRaw) {
+//				System.out.println("Fecha: " + resultArray[0] + ", Total: "
+//						+ resultArray[1]);
+				Date fecha = new Date(resultArray[0].toString());
+				fecha.setHours(0);
+				fecha.setMinutes(0);
+				fecha.setSeconds(0);
+				comandas.add(new Comanda(fecha, new Float(resultArray[1]
+						.toString())));
+			}
+			comandasRaw.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return comandas;
+	}
 	public void addProducto(Producto p) {
 		try {
 			getHelper().getProductoDao().create(p);

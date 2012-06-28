@@ -10,13 +10,16 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" >
 
-        <TextView
-            android:id="@+id/mes"
+        <Button
+            android:id="@+id/mesDisplay"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
+            android:background="#000000"
             android:gravity="center_horizontal"
+            android:text="@string/mes"
             android:textColor="#f89f29"
             android:textSize="22dp" />
+        
     </RelativeLayout>
 
     <LinearLayout

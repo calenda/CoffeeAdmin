@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.calenda.coffeeadmin.dateslider.SliderContainer
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" 
+    android:id="@+id/dateSliderContainer"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <com.calenda.coffeeadmin.dateslider.ScrollLayout
+        style="@style/Scroller"
+        app:labelerClass="com.calenda.coffeeadmin.dateslider.labeler.MonthYearLabeler"
+        app:labelerFormat="%tb %tY"
+        app:childWidth="90dp"
+        />
+    <com.calenda.coffeeadmin.dateslider.ScrollLayout
+        style="@style/Scroller"
+        app:labelerClass="com.calenda.coffeeadmin.dateslider.labeler.DayDateLabeler"
+        app:labelerFormat="%td %ta"
+        app:childWidth="45dp"
+        />
+    <include layout="@layout/dialogbuttons"/>
+</com.calenda.coffeeadmin.dateslider.SliderContainer>

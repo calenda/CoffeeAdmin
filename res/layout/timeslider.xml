@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<org.ri60.DateSlider.SliderContainer
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" 
+    android:id="@+id/dateSliderContainer"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <org.ri60.DateSlider.ScrollLayout
+        style="@style/Scroller"
+        app:labelerClass="org.ri60.DateSlider.labeler.HourLabeler"
+        app:labelerFormat="%tk"
+        app:childWidth="90dp"/>
+    <org.ri60.DateSlider.ScrollLayout
+        style="@style/Scroller"
+        app:labelerClass="org.ri60.DateSlider.labeler.MinuteLabeler"
+        app:labelerFormat="%tM"
+        app:childWidth="45dp"/>
+    <include layout="@layout/dialogbuttons"/>
+</org.ri60.DateSlider.SliderContainer>

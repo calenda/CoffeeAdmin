@@ -16,15 +16,15 @@
             android:layout_height="wrap_content"
             android:tabStripEnabled="true" />
 
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="2dip"
-            android:background="#211c21" />
+<!--         <View -->
+<!--             android:layout_width="fill_parent" -->
+<!--             android:layout_height="2dip" -->
+<!--             android:background="#33B5E5" /> -->
 
         <View
             android:layout_width="fill_parent"
             android:layout_height="2dip"
-            android:background="#FFF" />
+            android:background="#177BBD" />
 
         <FrameLayout
             android:id="@android:id/tabcontent"

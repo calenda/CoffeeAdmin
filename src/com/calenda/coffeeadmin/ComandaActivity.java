@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.KeyEvent;
@@ -42,14 +43,12 @@ public class ComandaActivity extends Activity {
 		return true;
 
 	}
-
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.nuevoProducto:
+		case R.id.agregarProducto:
 			addRow();
 			return true;
-
 		case R.id.guardar:
 			guardar();
 			Toast.makeText(ComandaActivity.this, "Comanda guardada",
@@ -57,6 +56,10 @@ public class ComandaActivity extends Activity {
 			return true;
 		case R.id.limpiar:
 			limpiar();
+			return true;
+		case R.id.catProductos:
+			Intent i = new Intent(this, CatProductosActivity.class);
+			startActivity(i);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
@@ -155,7 +158,7 @@ public class ComandaActivity extends Activity {
 
 		mProductos = (String[]) nombresProds.toArray(new String[nombresProds
 				.size()]);
-		addRow();
+//		addRow();
 	}
 
 	private void fillSpinProductos(Spinner s) {
